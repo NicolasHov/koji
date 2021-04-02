@@ -1,0 +1,24 @@
+.wrapperArticle {
+    display: flex;
+}
+
+.containerText {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    padding-left: 1em;
+}
+
+.infos {
+    line-height: 2em;
+}
+
+/*  RESPONSIVE MOBILE <650px */
+@media screen and (max-width: 650px){
+    .wrapperArticle {
+        text-align: center;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+  }

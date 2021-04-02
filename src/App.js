@@ -13,6 +13,7 @@ const findArticleById = (articles, id) => {
 const App = () => {
 
   const [articles, setArticles] = useState([]);
+  const [users, setUsers] = useState([]);
   const [hasError, setHasError] = useState(false);
 
   const fetchArticles = async () => {
@@ -32,8 +33,26 @@ const App = () => {
     }
   }
 
+  const fetchUsers = async () => {
+    try {
+      fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(data => {
+          if (!data.ok) {
+            setHasError(true);
+          }
+          setUsers(data)
+          setHasError(false);
+        })
+    } catch (err) {
+      console.error(err);
+      setHasError(true);
+    }
+  }
+
   useEffect(() => {
     fetchArticles();
+    fetchUsers()
   }, []);
 
   if (hasError) {
@@ -44,11 +63,12 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/">
-          <ArticlesList articles={articles} />
+          <ArticlesList articles={articles} users={users} />
         </Route>
         <Route path={`/article/:articleId`}>
           {(props) => {
-            return <Article article={findArticleById(articles, parseInt(props.match.params.articleId))} />
+            return <Article 
+              article={findArticleById(articles, parseInt(props.match.params.articleId))} />
           }}
         </Route>
         <Route path="*"><NotFound /></Route>

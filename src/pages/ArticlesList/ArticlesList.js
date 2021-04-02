@@ -2,7 +2,12 @@ import React from "react";
 import "./ArticlesList.css";
 import { Link } from "react-router-dom";
 
-export const ArticlesList = ({ articles }) => {
+const findUserById = (users, id) => {
+  let x = users.find(user => user.id === id);
+  return x.name
+}
+
+export const ArticlesList = ({ articles, users }) => {
   return (
     <div className="blog">
       <h1 className="title">Articles List</h1>
@@ -13,7 +18,7 @@ export const ArticlesList = ({ articles }) => {
               <Link to={`/article/${article.id}`} className="text-link">
                 <li className="listItem">
                   <h2>{article.title}</h2>
-                  <h6>User n°{article.userId}</h6>
+                  <h6>{findUserById(users, article.userId)}</h6>
                   <div className="bodyArticle">{article.body}</div>
                 </li>
               </Link>

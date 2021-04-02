@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Article.css";
 
 export const Article = ({ article }) => {
@@ -17,6 +18,9 @@ export const Article = ({ article }) => {
           <p>{article.body}</p>
         </div>
       </div>
+      <Link to={`/`}>
+        <button>Home</button>
+      </Link>
     </div>
   )
 }

@@ -10,7 +10,7 @@ export const ArticlesList = ({ articles }) => {
         <div className="wrapper">
           {(articles != null) && articles.map((article) => (
             <div key={article.id}>
-              <Link to={`/article/${article.id}`}>
+              <Link to={`/article/${article.id}`} className="text-link">
                 <li className="listItem">
                   <h2>{article.title}</h2>
                   <h6>User n°{article.userId}</h6>

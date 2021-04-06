@@ -11,26 +11,22 @@
   text-align: left;
 }
 
-.list {
-  list-style-type: none;
-  text-align: center;
-  padding: 0px;
-}
-
-.listItem {
-  display: inline-block;
-}
-
 .wrapper {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-gap: 20px;
-  grid-auto-rows: 250px;
 }
 
 .name {
   text-align: center;
   padding-bottom: 5px;
+}
+
+.bodyArticle {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
 }
 
 /*  RESPONSIVE TABLET / SMALL COMPUTER SCREEN >780px */

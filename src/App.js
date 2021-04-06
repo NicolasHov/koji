@@ -10,40 +10,25 @@ const findArticleById = (articles, id) => {
   return articles.find(article => article.id === id);
 }
 
+const API_URL = 'https://jsonplaceholder.typicode.com';
+
+const fetchAPI = async (endpoint) => {
+    const response = await fetch(`${API_URL}/${endpoint}`);
+    return response.json();
+}
+
+
 const App = () => {
 
   const [articles, setArticles] = useState([]);
   const [users, setUsers] = useState([]);
   const [hasError, setHasError] = useState(false);
 
-  const fetchArticles = async () => {
+  const fetchAndSet = async (endpoint, setData) => {
     try {
-      fetch('https://jsonplaceholder.typicode.com/posts')
-        .then(response => response.json())
-        .then(data => {
-          if (!data.ok) {
-            setHasError(true);
-          }
-          setArticles(data)
-          setHasError(false);
-        })
-    } catch (err) {
-      console.error(err);
-      setHasError(true);
-    }
-  }
-
-  const fetchUsers = async () => {
-    try {
-      fetch('https://jsonplaceholder.typicode.com/users')
-        .then(response => response.json())
-        .then(data => {
-          if (!data.ok) {
-            setHasError(true);
-          }
-          setUsers(data)
-          setHasError(false);
-        })
+      const data = await fetchAPI(endpoint);
+      setData(data)
+      setHasError(false);
     } catch (err) {
       console.error(err);
       setHasError(true);
@@ -51,8 +36,8 @@ const App = () => {
   }
 
   useEffect(() => {
-    fetchArticles();
-    fetchUsers()
+    fetchAndSet('users', setUsers);
+    fetchAndSet('posts', setArticles);
   }, []);
 
   if (hasError) {
